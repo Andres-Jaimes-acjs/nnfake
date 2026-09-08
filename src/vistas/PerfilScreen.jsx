@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { ChevronLeft } from 'lucide-react'
 
 const PerfilScreen = ({ saldos, onSave, onBack }) => {
-  const [form, setForm] = useState({ ...saldos })
+  const [form, setForm] = useState({ cdt: 0, ...saldos })
 
   const handleChange = (campo) => (e) =>
     setForm({ ...form, [campo]: Number(e.target.value) || 0 })
@@ -50,6 +50,17 @@ const PerfilScreen = ({ saldos, onSave, onBack }) => {
             step="0.01"
             value={form.rendimiento}
             onChange={handleChange('rendimiento')}
+            className="w-full border border-gray-300 rounded-xl px-4 py-3 text-lg font-bold focus:outline-none focus:ring-2 focus:ring-[#820AD1]"
+          />
+        </div>
+
+        <div>
+          <label className="text-sm font-medium text-gray-500 mb-1 block">CDT</label>
+          <input
+            type="number"
+            step="0.01"
+            value={form.cdt}
+            onChange={handleChange('cdt')}
             className="w-full border border-gray-300 rounded-xl px-4 py-3 text-lg font-bold focus:outline-none focus:ring-2 focus:ring-[#820AD1]"
           />
         </div>

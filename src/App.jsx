@@ -11,7 +11,9 @@ const STORAGE_KEY = 'nuFake_saldos'
 function cargarSaldos() {
   try {
     const guardado = localStorage.getItem(STORAGE_KEY)
-    return guardado ? JSON.parse(guardado) : saldosIniciales
+    if (!guardado) return saldosIniciales
+    const parsed = JSON.parse(guardado)
+    return { ...saldosIniciales, ...parsed, cdt: parsed.cdt ?? 0 }
   } catch {
     return saldosIniciales
   }

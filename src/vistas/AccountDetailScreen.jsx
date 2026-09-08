@@ -4,6 +4,7 @@ const formatearDinero = (n) =>
   '$' + n.toFixed(2).replace('.', ',').replace(/\B(?=(\d{3})+(?!\d))/g, '.')
 
 const AccountDetailScreen = ({ saldos, onBack, onCajitasClick }) => {
+  const totalCajitas = (saldos.totalCajitas || 0) + (saldos.cdt || 0)
   const transactions = [
     { id: 1, type: 'transfer_out', title: 'Transferencia enviada', name: 'Maria Lopez', date: 'Hoy', amount: '-$50.000', icon: <ArrowUpRight className="w-5 h-5 text-gray-700" /> },
     { id: 2, type: 'transfer_in', title: 'Transferencia recibida', name: 'Carlos Perez', date: 'Ayer', amount: '+$120.000', icon: <ArrowDownLeft className="w-5 h-5 text-gray-700" /> },
@@ -25,7 +26,7 @@ const AccountDetailScreen = ({ saldos, onBack, onCajitasClick }) => {
 
       <button className="px-6 mt-4 mb-8 w-full text-left active:opacity-70 transition-opacity" onClick={onCajitasClick}>
         <h2 className="text-[16px] font-medium text-gray-600">Saldo disponible</h2>
-        <h1 className="text-4xl font-bold mt-1 mb-2">{formatearDinero(saldos.totalCajitas)}</h1>
+        <h1 className="text-4xl font-bold mt-1 mb-2">{formatearDinero(totalCajitas)}</h1>
         <p className="text-[14px] font-medium text-green-600 flex items-center gap-1">
           + {formatearDinero(saldos.rendimiento).replace('$', '')} este mes
         </p>
